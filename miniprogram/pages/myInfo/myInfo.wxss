@@ -1,0 +1,63 @@
+.body{
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40rpx;
+}
+
+.info .info_item{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  height: 170rpx;
+  border-bottom: 4rpx solid #e4d4d4;
+}
+.info .info_item .avatarUrl{
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  border: 3rpx solid #ff70b4;
+}
+.phone_right{
+  display: flex;
+  align-items: center;
+}
+.phone_right .edit_input{
+  border: 3rpx solid #d3d3d3;
+  padding: 15rpx 15rpx;
+  margin-right: 10rpx;
+}
+.phone_right .edit_status .edit_icon{
+  height: 40rpx;
+  width: 40rpx;
+}
+.phone_right .edit{
+  position: relative;
+}
+
+.phone_right .edit .del_icon{
+  position:absolute;
+  width: 35rpx;
+  height: 35rpx;
+  right: 40rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.btn{
+  width: 80%;
+  background-color: #ff70b4;
+  color: #fff;
+  margin-top: 50rpx;
+}
+.phone_right .phone{
+  margin-right:160rpx;
+}
+

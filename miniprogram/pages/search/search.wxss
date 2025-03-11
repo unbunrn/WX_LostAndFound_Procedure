@@ -1,0 +1,82 @@
+.body{
+  background-color: #fff;
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 20rpx;
+}
+.search{
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #f3f3f3;
+  border-radius: 40rpx;
+  padding: 10rpx 20rpx;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+}
+.search .search_icon{
+  width: 40rpx;
+  height: 40rpx;
+   margin-right: 10rpx;
+}
+
+.search .search_del{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 20rpx;
+
+}
+
+.search_log{
+  display: flex;
+  padding: 30rpx 20rpx;
+  justify-content: space-between;
+  font-size: 30rpx;
+  border-bottom: 3rpx solid #d8d2d2;
+}
+
+.search_log .del_icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.log_list{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.log_list .log_item{
+  background-color: rgb(146, 124, 124);
+  color: #fff;
+  padding: 10rpx;
+  border-radius: 15rpx;
+  margin-right: 15rpx;
+  margin-bottom: 5rpx;
+}
+
+.result_search{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30rpx;
+}
+.result_search .search_item{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;  /* 盒模型 */
+  border-bottom: 3rpx solid #dfdce6;
+}
+.search_item .search_item_right{
+  width: 30rpx;
+  height: 30rpx;
+}
+.Imgbtn{
+  width: 100vw;
+  margin-top: 20rpx;
+  
+}

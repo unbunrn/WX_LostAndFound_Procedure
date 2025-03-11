@@ -1,0 +1,19 @@
+<view class="body">
+  <SearchInput bind:tap="toSearch" />  <!-- 搜索框 -->
+  <!-- 轮播 -->
+  <swiper class="banner" indicator-dots="true"
+        autoplay="false" interval="2000" duration="500">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item> 
+            <image class="banner_image" src="{{item}}"></image>
+          </swiper-item>
+        </block>
+  </swiper>
+
+  <Tab bindgettab="getTab" tabList = "{{tabList}}"/> <!-- 寻主 寻物 -->
+
+  <view class="lose">
+    <ViewCard wx:for="{{ list }}" wx:key="index" data="{{ item }}"
+    bind:tap="toDetail" data-info="{{item}}"/>
+  </view>
+</view>

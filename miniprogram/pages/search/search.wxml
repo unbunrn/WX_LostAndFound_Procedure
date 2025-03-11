@@ -1,0 +1,26 @@
+<view class="body">
+  <!-- 输入框 -->
+  <view class="search">
+    <image class="search_icon" src="../../images/search.png" />
+    <input value="{{_search}}" placeholder="搜索" bindinput="getSearch" type="text" />
+    <image wx:if="{{_search.length>0}}" bind:tap="delSearch" class="search_del" src="../../images/del.png" />
+  </view>
+  <!-- 输入框为空时 -->
+  <button class="Imgbtn"  bindtap="uploadImage">拍照搜索</button>
+  <view class="empty_search" wx:if="{{search.length===0}}">
+    <view class="search_log">
+      <text>搜索历史</text>
+      <image bind:tap="delLog" class="del_icon" src="../../images/delete.png" />
+    </view>
+    <view class="log_list">
+      <view class="log_item" wx:for="{{searchLog}}" wx:key="index" bind:tap="toSearchHistory" data-name="{{item}}">{{item}}</view>
+    </view>
+  </view>
+  <!--输入框非空时  -->
+  <view class="result_search" wx:else>
+    <view class="search_item" wx:for="{{search_res}}" wx:key="index" data="{{item}}" bind:tap="toDetail" data-info="{{item}}">
+      <text>{{item.name}}</text>
+      <image class="search_item_right" src="../../images/bigger.png" />
+    </view>
+  </view>
+</view>

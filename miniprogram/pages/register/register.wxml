@@ -1,0 +1,14 @@
+<view class="body">
+  <image class="logo" src="../../images/logo.png"/>
+  <view class="container">
+    <input class="input" placeholder="请输入账号"
+    bindinput="getUsername" type="text"/>
+    <input class="input" placeholder="请输入密码"
+    bindinput="getPassword" type="text"/>
+    <input class="input" placeholder="请再次密码"
+    bindinput="getConfirmPwd" type="text"/>
+    <text class="to_login" bind:tap="toLogin">去登录</text>
+    <button class="register_btn" bind:tap="submit" >注册</button>
+
+  </view>
+</view>

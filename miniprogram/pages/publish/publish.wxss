@@ -1,0 +1,146 @@
+.body{
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.top{
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 30rpx 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 5rpx solid #f3f3f3;
+}
+
+.top .publish_btn{
+  margin: 0 !important;
+  background-color: #ff70b4;
+  color: #fff;
+  border-radius: 40rpx;
+  width: 150rpx;
+}
+
+.top .close_icon{
+  height: 35rpx;
+  width: 35rpx;
+}
+
+.container{
+  /* 上右下左 */
+  padding: 30rpx 35rpx 50rpx 35rpx;
+}
+.type{
+  display: flex;
+}
+
+.type .type_item{
+  background-color: #eee;
+  padding: 10rpx 70rpx;
+  border: 1rpx solid #aaa;
+  margin-right: 30rpx;
+  border-radius: 10rpx;
+}
+
+.type .type_select{
+  background-color: #ff70b4;
+  color: #fff;
+}
+
+.classify{
+  margin-top: 50rpx;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+
+.classify .label{
+  margin-right: 20rpx;
+  white-space: nowrap;
+}
+
+.classify .picker{
+  width: 100%;
+}
+
+.picker .empty,.select {
+  border: 2rpx solid #aaa;
+  width: 100%;
+  padding: 10rpx 20rpx;
+  border-radius: 15rpx ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+}
+.picker .empty .select_icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.select .select_del_icon{
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.input_list{
+  padding: 30rpx 15rpx ;
+  padding-top: 80rpx;
+  border-bottom: 5rpx solid #c5c0c0;
+}
+
+.input_list .input_item{
+  margin-bottom: 50rpx;
+}
+
+.upload{
+  padding-top: 20rpx;
+}
+
+.upload .upload_top{
+  display: flex;
+  justify-content: space-between;
+}
+.upload .upload_list{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.upload .upload_list .upload_icon{
+  width: 33%;
+  height: 220rpx;
+
+}
+.desc{
+  padding: 30rpx 15rpx;
+  border-bottom: 5rpx solid #c5c0c0;
+  position: relative;
+}
+
+.desc .close_icon{
+  height: 40rpx;
+  width: 40rpx;
+  position :absolute;
+  top: 30rpx;
+  right: 0;
+}
+
+.image_list{
+  width: 33%;
+  height: 220rpx;
+  position: relative;
+}
+.image_list .common{
+  width: 100%;
+  height: 100%;
+}
+.image_list .del_common{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+}

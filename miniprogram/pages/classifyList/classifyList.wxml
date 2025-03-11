@@ -1,0 +1,7 @@
+<view class ="body">
+  <Tab bindgettab="getTab" tabList = "{{tabList}}"/> 
+  <view class = "lose_list">
+    <ViewCard wx:for="{{ list }}" wx:key="index" data="{{item}}"
+    bind:tap="toDetail" data-info="{{item}}"/>
+  </view>
+</view> 

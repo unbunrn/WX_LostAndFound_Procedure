@@ -1,0 +1,10 @@
+<view class="lose_item">
+  <image class = "lose_item_image" src="{{data.imgList[0]}}"></image>
+  <view class="lose_content">
+    <text class="name">{{data.name}}</text>
+    <text class="region">{{data.region}}</text>
+    <text class="date">{{data.date}}</text>
+    <text class="desc">{{data.desc}}</text>
+    <text class="publish_time">{{data.time}}</text>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<view class="body">
+  <SearchInput bind:tap="toSearch" />
+
+  <view class="classify_container">
+    <view class="classify_left">
+      <view class="classify_left_item {{ select=== index ? 'classify_select' :'' }}" 
+      wx:for="{{ asideBar }}"
+      wx:key="index"
+      data-index="{{index}}"
+      bind:tap="select_left"
+      >
+        <text class="classify_left_text">{{ item }}</text>            
+        <block wx:if="{{ select === index}}">
+          <view class="classify_line"></view>
+        </block>
+      </view>
+    </view>
+
+    <view class="classify_right">
+      <view class="classify_right_item" wx:for="{{ rightList[select] }}" 
+      wx:key="index" bind:tap="toClassify" data-text="{{item.text}}" >
+        <image class="classify_right_image" src="{{item.url}}"/>
+        <text class="classify_right_text">{{item.text}}</text>
+      </view>
+    </view>
+
+  </view>
+</view>

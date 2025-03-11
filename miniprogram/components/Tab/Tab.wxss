@@ -1,0 +1,25 @@
+.tab{
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+}
+.tab_item{
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  position: relative;
+}
+.tab_item.tab-default {
+  color: #666; /* 未选中的文字颜色 */
+  background-color: #f0f0f0; /* 可选：未选中的背景颜色 */
+}
+.tab_line{
+  position: absolute;
+  width: 65%;
+  height: 0;
+  border: 3rpx solid #ff70b4 ;
+  bottom: 0;
+}

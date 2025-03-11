@@ -1,0 +1,37 @@
+<view class="body">
+    <!-- 轮播 -->
+    <swiper class="banner" indicator-dots="true"
+        autoplay="false" interval="2000" duration="500">
+        <block wx:for="{{info.imgList}}" wx:key="*this">
+          <swiper-item> 
+            <image class="banner_image" src="{{item}}"></image>
+          </swiper-item>
+        </block>
+    </swiper>
+    <view class="name">{{info.name}}</view>
+
+    <view class="container">
+      <view class="date item">
+        <text class="label">拾到时间</text>
+        <text>{{info.date}}</text>
+      </view>
+      <view class="region item">
+        <text class="label">拾到地点</text>
+        <text>{{info.region}}</text>
+      </view>
+      <view class="desc item">{{info.desc}}</view>
+    </view>
+
+    <view class="bottom">
+      <view class="bottom_left" bind:tap="getPhone">
+        <image class="icon_com" src="../../images/comment.png"/>
+        <text>点击联系我</text>
+      </view>
+
+      <view class="bottom_right" bind:tap="toCollection">
+        <image class="icon_col"  src="{{collectionIcon[0]}}"/>
+        <text>收藏</text>
+      </view>
+
+    </view>
+</view>

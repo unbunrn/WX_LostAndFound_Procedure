@@ -1,0 +1,62 @@
+.search{
+  background-color: #ff70b4 !important ;
+}
+
+.classify_container {
+  display: flex;
+  background-color: #fff;
+}
+.classify_left{
+  display: flex;
+  flex-direction: column;
+}
+
+.classify_left_item{
+  background-color: #f3f3f3;
+  padding: 40rpx 20rpx;
+  text-align: center ;
+  font-size: 26rpx;
+  position: relative;
+}
+
+.classify_left_text{
+  white-space: nowrap;
+}
+
+.classify_line {
+  position: absolute;
+  left: 0;
+  width: 6rpx; /* 设置线的宽度 */
+  height: 50%;
+  background-color: #ff70b4; /* 设置实心颜色 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.classify_select{
+  background-color: #fff;
+}
+
+.classify_right{
+  display: flex;
+  /* 换行*/
+  flex-wrap: wrap;
+  width: 100%;
+  align-content: flex-start;
+}
+.classify_right_item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 33.3%;
+  padding : 20rpx 0;
+}
+.classify_right_item .classify_right_image{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.classify_right_item .classify_right_text{
+  font-size: 26rpx;
+}

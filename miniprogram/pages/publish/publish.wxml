@@ -1,0 +1,66 @@
+<view class="body">
+  <!-- 顶端 x和发布 -->
+  <view class="top">
+   <image class="close_icon" bind:tap="backPage" src="../../images/close.png"/>
+   <button size="mini" class="publish_btn" bind:tap="toPublish">发布</button>
+  </view>
+
+  <view class="container">
+    <!-- 寻主寻物 -->
+    <view class="type">
+      <view class="type_item {{type==='0'?'type_select':''}}"
+       bind:tap="selectTap" data-id="0">寻主</view>
+      <view class="type_item {{type==='1'?'type_select':''}}"
+       bind:tap="selectTap" data-id="1">寻物</view>
+    </view>
+    <!-- 物品类别 -->
+    <view class="classify">
+    <text class="label">物品类别</text>
+      <picker  class="picker"
+        mode="multiSelector"
+        bindchange="bindMultiPickerChange"
+        bindcolumnchange="bindMultiPickerColumnChange"
+        value="{{multiIndex}}" 
+        range="{{multiArray}}">
+        <view class="picker_item">
+          <view class="select" wx:if="{{select}}">
+            <text>{{multiArray[0][multiIndex[0]]}} / {{multiArray[1][multiIndex[1]]}}</text>
+            <image class="select_del_icon" catch:tap="closeSelect" src="../../images/del.png"/>
+          </view>
+          <view class="empty" wx:else>
+             <text>请选择</text>
+             <image class="select_icon" src="../../images/select.png"/> 
+          </view>
+        </view>
+     </picker>
+    </view>
+    <!-- 输入项 -->
+    <view class="input_list">
+      <input value="{{name}}" class="input_item" bindinput="getName" placeholder="请输入物品名称" type="text"/>
+      <input value="{{date}}" class="input_item" bindinput="getDate" placeholder="请输入丢失/拾取时间" type="text"/>
+      <input value="{{region}}" class="input_item" bindinput="getRegion" placeholder="请输入丢失/拾取地点" type="text"/>
+      <input value="{{phone}}" class="input_item" bindinput="getPhone" placeholder="如何联系你？如qq12345678" type="text"/>
+    </view>
+    <!-- 描述项 -->
+    <view class="desc">
+      <textarea value="{{desc}}" bindinput="getDesc" placeholder="请输入物品描述" cols = "25" rows = "10" />
+      <image bind:tap="delDesc" wx:if="{{desc.length>0}}" class="close_icon" src="../../images/del.png"/>
+    </view>
+
+    <!-- 输入图片 -->
+    <view class="upload">
+      <view class="upload_top">
+        <text>最多选择6张图片</text>
+        <text>{{imgList.length}}/6</text>
+      </view>
+      <view class="upload_list">
+        <view class="image_list" wx:for="{{imgList}}" wx:key="index">
+          <image class="common" src="{{item}}"/>
+          <image class="del_common" bind:tap="delImage" data-index="{{index}}" 
+          src="../../images/del2.png"/>
+        </view>
+        <image class="upload_icon" wx:if="{{imgList.length<6}}" bind:tap="uploadImage" src="../../images/upload.png"/>
+      </view>
+    </view>
+  </view>
+</view>

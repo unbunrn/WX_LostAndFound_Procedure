@@ -1,0 +1,22 @@
+/* 轮播图 */
+.banner{ 
+  height: 350rpx;
+}
+.banner_image{
+  width: 100%;
+  height: 350rpx;
+}
+
+
+.lose{
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  /* gap: 20rpx; */
+  flex-direction: column;
+} 
+.body{
+  padding-bottom: 200rpx;
+}
+
+

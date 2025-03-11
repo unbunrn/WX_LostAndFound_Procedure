@@ -1,0 +1,37 @@
+<view class = "body">
+  <view class="unlogin_body" wx:if="{{!login}}">
+    <view class="unlogin">
+    <image class  = "unlogin_image" src="../../images/unlogin.png"/>
+    <button class = "unlogin_button" open-type="getUerInfo" bindtap = "toLogin" >微信一键登录</button>  
+    </view>
+  </view>
+
+  <view class="login " wx:else>
+    <view class ='info'>
+      <image class="avatarUrl" src="{{avatarUrl }}"/>
+      <text class="nickName">{{nickName}}</text>
+    </view>
+
+    <view class="cell_body">
+      <view class ="cell_list">  
+        <view 
+        class="cell" 
+        wx:for="{{cellList}}" 
+        wx:key="index"
+        data-page = "{{item.page}}"
+        bindtap="toDetail"
+        >
+          <view class="cell_left">
+            <image class="cell_left_image" src="{{item.url}}"/>
+            <text class="cell_left_text">{{item.text}}</text>
+          </view>
+          
+          <view class="cell_right">
+            <image class="cell_right_image" src="../../images/bigger.png"/>
+          </view>
+        </view>
+      </view>
+   </view>
+    
+  </view>
+</view>

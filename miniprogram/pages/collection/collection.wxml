@@ -1,0 +1,14 @@
+<view class="body" style="padding-bottom: calc(130rpx + env(safe-area-inset-bottom))">
+  <view wx:if="{{login}}">
+   <Tab bindgettab="getTab" tabList = "{{tabList}}"/> 
+    <view class = "lose_list">
+      <ViewCard wx:for="{{ list }}" wx:key="index" data="{{item}}"
+      bind:tap="toDetail" data-info="{{item}}"/>
+    </view>
+  </view>
+  <view wx:else>
+    请您登录！
+  </view>
+  
+ 
+</view> 

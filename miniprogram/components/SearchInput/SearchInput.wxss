@@ -1,0 +1,37 @@
+.search {
+  background-color: #fff;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 输入框 */
+.search_input{
+  background-color: #f3f3f3;
+  height: 80rpx;
+  width: 90%;
+  border-radius: 40rpx;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+
+}
+.search_content{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+.search_content .search_icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.search_content .search_text{
+   font-size: 16px; /* 字体大小 */
+  color: #333; /* 文字颜色 */
+  text-align: center; /* 文本居中 */
+  padding: 5px; /* 内边距 */
+}

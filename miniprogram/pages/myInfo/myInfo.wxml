@@ -1,0 +1,42 @@
+<view calss = "body">
+  <view class = "info">
+    <view class="info_item">
+      <text>头像</text>
+      <image class="avatarUrl" src="{{avatarUrl}}"/>
+    </view>
+    <view class="info_item">
+      <text>昵称</text>
+      <text>{{nickName}}</text>
+    </view>
+    <view class="info_item"> 
+      <text>联系方式</text>
+      <view class="phone_right">
+      <!-- 编辑输入框 -->
+        <view class="edit" wx:if="{{ edit }}">
+          <input 
+          class="edit_input"
+          type="text"
+          value="{{phone}}"
+          bindinput="getPhone"
+           />  
+          <image 
+          wx:if="{{phone.length>0}}" 
+          class="del_icon" 
+          src="../../images/del.png"
+          bind:tap="delPhone"
+          />
+        </view>
+        <!-- 输入框内容展示 -->
+        <view class="phone" wx:if="{{!edit}}">{{_phone}}</view>
+        <!-- 编辑状态 -->
+        <view class="edit_status">
+          <image wx:if="{{!edit}}" bind:tap="toEdit"
+          class="edit_icon" src="../../images/edit.png"/>
+          <text wx:if="{{edit}}" bind:tap="toEdit" >取消</text>
+        </view>
+      </view>
+    </view>
+    <button wx:if="{{edit}}" class="btn" bind:tap="saveChange">保存修改</button>
+
+  </view>
+</view>
