@@ -17,6 +17,32 @@ Page({
       url: `../infoDetail/infoDetail?LoseId=${info.id}&info=${JSON.stringify(info)}`,
     })
   },
+  getEdit(e){
+    const id = e.detail;
+    wx.navigateTo({
+      url: `../publish/publish?id=${id}`,
+    })
+  },
+  async getDelete(e){
+    const _id = e.detail;
+    const params = {
+      _id
+    }
+    const result = await ajax("/delLose","POST",params);
+    const{data} = result;
+    if(data=="success"){
+      wx.showToast({
+        title: '删除成功',
+        icon: 'success', 
+      })
+    }else{
+      wx.showToast({
+        title: '删除失败',
+        icon:'error', 
+      })
+    }
+    this.onLoad();
+  },
 
   getTab(e){
     this.setData({

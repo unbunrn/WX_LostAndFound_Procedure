@@ -50,7 +50,7 @@ Page({
           ...item,
            time:formatTime(item.time)
         }
-      }) 
+      })
     })
     const openid = wx.getStorageSync('openid');//获取openid
     if(!openid){//如果没有openid

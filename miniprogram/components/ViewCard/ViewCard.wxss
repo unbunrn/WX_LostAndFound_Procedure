@@ -1,9 +1,8 @@
+
 .lose_item{
   width: 100%;
   display: flex;
   padding: 20rpx;
-  background-color: #fff;
-  margin-bottom: 5rpx;
   box-sizing: border-box;
 }
 .lose_item .lose_item_image{
@@ -42,4 +41,17 @@
   margin-left: auto;
   color: #666;
   font-size: 26rpx;
+}
+.body{
+  background-color: #fff;
+  margin-bottom: 5rpx;
+  border-bottom: 2rpx solid #F6F6F6;
+}
+
+.handle_btn{
+  display: flex;
+  justify-content: flex-end;
+}
+.op_btn{
+  margin-right: 20rpx;
 }

@@ -2,7 +2,7 @@
   <!-- 顶端 x和发布 -->
   <view class="top">
    <image class="close_icon" bind:tap="backPage" src="../../images/close.png"/>
-   <button size="mini" class="publish_btn" bind:tap="toPublish">发布</button>
+   <button size="mini" class="publish_btn" bind:tap="toPublish">{{id?"修改":"发布"}}</button>
   </view>
 
   <view class="container">
