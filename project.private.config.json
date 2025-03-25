@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/multimodalResults/multimodalResults",
+          "pathName": "pages/multimodalResults/multimodalResults",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/login/login",
           "pathName": "pages/login/login",
           "query": "",

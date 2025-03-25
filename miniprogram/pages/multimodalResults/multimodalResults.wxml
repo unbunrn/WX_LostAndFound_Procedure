@@ -1,0 +1,50 @@
+<view class="body">
+  <view class="search-info">
+    <view class="search-text" wx:if="{{searchText}}">
+      <text class="label">搜索文本:</text>
+      <text class="content">{{searchText}}</text>
+    </view>
+    <view class="search-images" wx:if="{{searchImages.length > 0}}">
+      <text class="label">搜索图片:</text>
+      <view class="image-list">
+        <view wx:for="{{searchImages}}" wx:key="index" class="image-wrapper">
+          <image 
+            src="{{item}}" 
+            mode="aspectFill" 
+            class="image-item"
+            bindtap="previewImage"
+            data-index="{{index}}"
+            binderror="handleImageError"
+            data-type="search"
+            data-index="{{index}}"
+          ></image>
+          <view class="image-error-placeholder" wx:if="{{item === defaultImage}}">
+            <icon type="warn" size="12" color="#999"></icon>
+            <text>图片加载失败</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <Tab bindgettab="getTab" tabList="{{tabList}}"/> 
+  
+  <view class="result-stats">找到 {{list.length}} 条结果</view>
+  
+  <view class="lose_list">
+    <ViewCard 
+      wx:for="{{ list }}" 
+      wx:key="index" 
+      data="{{item}}"
+      bind:tap="toDetail" 
+      data-info="{{item}}"
+    />
+  </view>
+
+  <view class="no-result" wx:if="{{list.length === 0}}">
+    <icon type="search" size="64" color="#999"></icon>
+    <text class="no-result-text">暂无搜索结果</text>
+    <text class="no-result-tip">请尝试使用其他关键词或图片搜索</text>
+    <button class="back-btn" bindtap="backToSearch">返回搜索页</button>
+  </view>
+</view> 

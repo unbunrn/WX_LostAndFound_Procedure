@@ -16,43 +16,78 @@ Page({
    * 处理收藏/取消收藏操作（核心功能）
    */
   async toCollection() {
-    const { info, collectionIcon,from } = this.data;
+    const { info, collectionIcon, from } = this.data;
+    
+    // 获取openid，检查登录状态
+    const openid = wx.getStorageSync('openid');
+    if (!openid) {
+      wx.showToast({ 
+        title: '请先登录', 
+        icon: 'none' 
+      });
+      return;
+    }
 
     // 通过图标状态判断当前是否已收藏
-    if (collectionIcon[0] === '../../images/collection1.png') {
-      // 收藏操作：组装需要保存的数据 
+    const isCurrentlyCollected = collectionIcon[0] === '../../images/collection2.png';
+    
+    // 统一处理ID - 无论从哪里进入，统一使用物品的_id
+    // 如果是从收藏页进入，则直接使用物品的_id；如果是普通进入，则使用info._id
+    const itemId = info._id || info.id;
+    
+    if (!isCurrentlyCollected) {
+      // 收藏操作：组装需要保存的数据 - 只需要保存必要的字段
       const params = {
-        ...info,             
-        id: info._id,//物品唯一标识
-        openid: wx.getStorageSync('openid') // 用户身份标识
+        id: itemId,
+        openid: openid
       };
+
       // 发送收藏请求
-      const result = await ajax('/toCollection', 'POST', params);
-      if (result.data === 'success') {
-        // 收藏成功提示
-        wx.showToast({ title: '收藏成功', icon: 'success' });  
-        // 切换图标顺序：把已收藏图标放到数组第一个位置
-        let last = collectionIcon.pop();
-        collectionIcon.unshift(last);
-        this.setData({ collectionIcon });
+      try {
+        const result = await ajax('/toCollection', 'POST', params);
+        if (result.data === 'success' || result.data === 'already_collected') {
+          // 收藏成功提示
+          wx.showToast({ title: '收藏成功', icon: 'success' });  
+          // 切换图标顺序：把已收藏图标放到数组第一个位置
+          this.setData({ 
+            collectionIcon: ['../../images/collection2.png', '../../images/collection1.png'],
+            'info.isCollected': true
+          });
+        }
+      } catch (error) {
+        console.error('收藏操作失败:', error);
+        wx.showToast({ title: '操作失败', icon: 'none' });
       }
     } else {
       // 取消收藏操作：组装请求参数
-      console.log(from)
       const params = {
-        id:from ==='collection'?info.id:info._id,//物品唯一标识
-        openid: wx.getStorageSync('openid')
+        id: itemId,
+        openid: openid
       };
+      
       // 发送取消收藏请求
-      const result = await ajax('/cancelCollection', 'POST', params);
-      if (result.data === 'success') {
-        // 取消收藏提示
-        wx.showToast({ title: '取消收藏', icon: 'success' });
-        
-        // 切换图标顺序：把未收藏图标放回第一个位置
-        let last = collectionIcon.pop();
-        collectionIcon.unshift(last);
-        this.setData({ collectionIcon });
+      try {
+        const result = await ajax('/cancelCollection', 'POST', params);
+        if (result.data === 'success') {
+          // 取消收藏提示
+          wx.showToast({ title: '取消收藏', icon: 'success' });
+          
+          // 切换图标
+          this.setData({ 
+            collectionIcon: ['../../images/collection1.png', '../../images/collection2.png'],
+            'info.isCollected': false
+          });
+          
+          // 如果是从收藏页进入，可以返回上一页
+          if (from === 'collection') {
+            setTimeout(() => {
+              wx.navigateBack();
+            }, 500);
+          }
+        }
+      } catch (error) {
+        console.error('取消收藏操作失败:', error);
+        wx.showToast({ title: '操作失败', icon: 'none' });
       }
     }
   },
@@ -86,24 +121,45 @@ Page({
   async onLoad(options) {
     // 接收页面跳转时传递的物品信息
     const{info,from} = options;
-    this.setData({ 
-      info: JSON.parse(info),
-      from
+    const parsedInfo = JSON.parse(info);
     
+    this.setData({ 
+      info: parsedInfo,
+      from
     });
 
-    // 检查当前用户是否已收藏该物品
-    const params = {
-      id:from ==='collection'?JSON.parse(info).id:JSON.parse(info)._id,//物品唯一标识,
-      openid: wx.getStorageSync('openid')
-    };
-    const result = await ajax('/isCollection', 'POST', params);
-    
-    // 如果已收藏，切换图标状态
-    if (result.data.length > 0) {
-      const icons = this.data.collectionIcon;
-      icons.unshift(icons.pop()); // 交换图标顺序
-      this.setData({ collectionIcon: icons });
+    // 如果从收藏页面点进来，物品已经带有isCollected标记，直接设置收藏状态
+    if (parsedInfo.isCollected) {
+      this.setData({ 
+        collectionIcon: ['../../images/collection2.png', '../../images/collection1.png']
+      });
+      return;
+    }
+
+    // 否则检查当前用户是否已收藏该物品
+    try {
+      const openid = wx.getStorageSync('openid');
+      if (!openid) return;
+      
+      // 统一使用物品的_id
+      const itemId = parsedInfo._id || parsedInfo.id;
+      
+      const params = {
+        id: itemId,
+        openid: openid
+      };
+      
+      const result = await ajax('/isCollection', 'POST', params);
+      
+      // 如果已收藏，直接设置收藏图标
+      if (result.data && result.data.length > 0) {
+        this.setData({
+          collectionIcon: ['../../images/collection2.png', '../../images/collection1.png'],
+          'info.isCollected': true
+        });
+      }
+    } catch (error) {
+      console.error('检查收藏状态失败:', error);
     }
   },
 

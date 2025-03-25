@@ -1,12 +1,44 @@
 <view class="body">
-  <!-- 输入框 -->
-  <view class="search">
-    <image class="search_icon" src="../../images/search.png" />
-    <input value="{{_search}}" placeholder="搜索" bindinput="getSearch" type="text" />
-    <image wx:if="{{_search.length>0}}" bind:tap="delSearch" class="search_del" src="../../images/del.png" />
+  <!-- 关键字搜索区域 -->
+  <view class="search-container">
+    <view class="search">
+      <image class="search_icon" src="../../images/search.png" />
+      <input value="{{_search}}" placeholder="关键字搜索" bindinput="getSearch" bindconfirm="confirmSearch" confirm-type="search" type="text" />
+      <image wx:if="{{_search.length>0}}" bind:tap="delSearch" class="search_del" src="../../images/del.png" />
+    </view>
   </view>
-  <!-- 输入框为空时 -->
-  <button class="Imgbtn"  bindtap="uploadImage">拍照搜索</button>
+
+  <!-- 多模态搜索区域 -->
+  <view class="multimodal-container">
+    <view class="section-title">多模态搜索</view>
+    
+    <!-- 文本输入区域 -->
+    <view class="text-input">
+      <textarea placeholder="请输入描述文字..." value="{{multimodalText}}" bindinput="getMultimodalText" maxlength="200"></textarea>
+      <view class="text-counter">{{multimodalText.length}}/200</view>
+    </view>
+    
+    <!-- 图片上传区域 -->
+    <view class="image-upload-area">
+      <view class="upload-title">上传图片（最多3张）</view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{multimodalImages}}" wx:key="index">
+          <image class="preview-image {{loadingState && index >= (multimodalImages.length - tempFilesCount) ? 'loading' : ''}}" src="{{item}}" mode="aspectFill"></image>
+          <view class="delete-btn" data-index="{{index}}" bindtap="deleteMultimodalImage">×</view>
+        </view>
+        
+        <view class="upload-btn" bindtap="chooseMultimodalImages" wx:if="{{multimodalImages.length < 3}}">
+          <image class="upload-icon" src="../../images/upload.png"></image>
+          <text>上传</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 开始搜索按钮 -->
+    <button class="multimodal-search-btn" bindtap="startMultimodalSearch" hover-class="button-hover">开始多模态搜索</button>
+  </view>
+
+  <!-- 输入框为空时显示搜索历史 -->
   <view class="empty_search" wx:if="{{search.length===0}}">
     <view class="search_log">
       <text>搜索历史</text>
@@ -16,8 +48,13 @@
       <view class="log_item" wx:for="{{searchLog}}" wx:key="index" bind:tap="toSearchHistory" data-name="{{item}}">{{item}}</view>
     </view>
   </view>
-  <!--输入框非空时  -->
+  
+  <!-- 关键字搜索有结果时 -->
   <view class="result_search" wx:else>
+    <view class="result-header">
+      <text class="result-title">搜索结果</text>
+      <view class="view-all" bindtap="confirmSearch" data-keyword="{{search}}">查看全部</view>
+    </view>
     <view class="search_item" wx:for="{{search_res}}" wx:key="index" data="{{item}}" bind:tap="toDetail" data-info="{{item}}">
       <text>{{item.name}}</text>
       <image class="search_item_right" src="../../images/bigger.png" />

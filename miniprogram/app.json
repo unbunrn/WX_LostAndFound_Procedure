@@ -12,10 +12,9 @@
     "pages/publish/publish",
     "pages/classifyList/classifyList",
     "pages/searchHistory/searchHistory",
+    "pages/multimodalResults/multimodalResults",
     "pages/register/register",
     "pages/login/login"
-   
-    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

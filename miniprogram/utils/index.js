@@ -9,19 +9,39 @@ export const formatTime = (time) => {
 
 
 //封装wx.request
-export const ajax = (url, method ,data) => {
+export const ajax = (url, method, data) => {
   const baseUrl = 'http://localhost:3000';
-  return new Promise((resolve,reject) => {
-    wx.request({
+  return new Promise((resolve, reject) => {
+    const requestTask = wx.request({
       url: baseUrl + url,
-      method: method?method:'GET',
+      method: method ? method : 'GET',
       data,
+      timeout: 10000, // 设置10秒超时
       success: (res) => {
-        resolve(res);
+        // 检查HTTP状态码
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(res);
+        } else {
+          // 处理HTTP错误
+          const error = new Error(`请求失败: HTTP状态码 ${res.statusCode}`);
+          error.statusCode = res.statusCode;
+          error.response = res;
+          reject(error);
+        }
       },
       fail: (error) => {
-        reject(error);
+        // 处理网络错误或超时
+        if (error.errMsg.includes('timeout')) {
+          reject(new Error('请求超时，请检查网络连接'));
+        } else if (error.errMsg.includes('fail')) {
+          reject(new Error('网络连接失败，请检查网络'));
+        } else {
+          reject(error);
+        }
       }
     });
+    
+    // 返回请求任务，允许调用方中断请求
+    return requestTask;
   });
 }

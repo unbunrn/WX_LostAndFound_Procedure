@@ -12,7 +12,8 @@ Page({
   },
   toDetail(e){
     const{info} = e.currentTarget.dataset;
-   
+    // 添加isCollected标记，因为从收藏页面进入的一定是已收藏状态
+    info.isCollected = true;
     wx.navigateTo({
       url: `../infoDetail/infoDetail?info=${JSON.stringify(info)}&from=collection`,
     })
@@ -30,18 +31,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
-    const { select } = this.data;
-    const openid = wx.getStorageSync('openid'); 
-    const params = {
+    try {
+      const { select } = this.data;
+      const openid = wx.getStorageSync('openid');
+      
+      // 检查登录状态
+      if (!openid) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        });
+        return;
+      }
+      
+      const params = {
         openid,
-        type:select
+        type: select
+      };
+      
+      const result = await ajax('/getCollection', 'GET', params);
+      
+      if (!result || !result.data) {
+        throw new Error('获取收藏数据失败');
+      }
+      
+      this.setData({
+        list: result.data,
+        login: true
+      });
+    } catch (error) {
+      console.error('加载收藏数据失败:', error);
+      wx.showToast({
+        title: '加载收藏失败',
+        icon: 'none'
+      });
+      this.setData({
+        list: [],
+        login: false
+      });
     }
-    const result = await ajax('/getCollection','GET',params)
-    this.setData({
-      list:result.data,
-      login:!!wx.getStorageSync('login')
-    })
-
   },
 
   /**
@@ -57,9 +85,10 @@ Page({
   onShow() {
     if(typeof this.getTabBar === 'function' && this.getTabBar()){
       this.getTabBar().setData({
-        select :3,
-      })
+        select: 3,
+      });
     }
+    // 每次显示页面时重新加载数据
     this.onLoad();
   },
 

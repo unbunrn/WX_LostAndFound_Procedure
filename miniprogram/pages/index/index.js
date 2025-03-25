@@ -14,7 +14,7 @@ Page({
       url: '../search/search',
     })
   },
-
+ 
   toDetail(e){
     const{info} = e.currentTarget.dataset;
     wx.navigateTo({

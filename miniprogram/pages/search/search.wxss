@@ -4,9 +4,16 @@
   min-height: 100vh;
   padding-top: 20rpx;
 }
+
+/* 关键字搜索容器 */
+.search-container {
+  width: 90%;
+  margin: 0 auto 30rpx;
+}
+
 .search{
   display: flex;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   background-color: #f3f3f3;
   border-radius: 40rpx;
@@ -15,10 +22,11 @@
   box-sizing: border-box;
   position: relative;
 }
+
 .search .search_icon{
   width: 40rpx;
   height: 40rpx;
-   margin-right: 10rpx;
+  margin-right: 10rpx;
 }
 
 .search .search_del{
@@ -26,9 +34,168 @@
   height: 40rpx;
   position: absolute;
   right: 20rpx;
-
 }
 
+/* 多模态搜索区域 */
+.multimodal-container {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  color: #333;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+/* 文本输入区域 */
+.text-input {
+  width: 100%;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.text-input textarea {
+  width: 100%;
+  height: 160rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.text-counter {
+  position: absolute;
+  bottom: 10rpx;
+  right: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 图片上传区域 */
+.image-upload-area {
+  width: 100%;
+  margin-bottom: 30rpx;
+}
+
+.upload-title {
+  font-size: 28rpx;
+  margin-bottom: 15rpx;
+  color: #666;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.image-item {
+  width: 180rpx;
+  height: 180rpx;
+  position: relative;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5rpx;
+  right: 5rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+}
+
+.upload-btn {
+  width: 180rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 2rpx dashed #ddd;
+  border-radius: 10rpx;
+}
+
+.upload-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 10rpx;
+}
+
+.upload-btn text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 多模态搜索按钮 */
+.multimodal-search-btn {
+  width: 100%;
+  height: 80rpx;
+  background-color: #5050ff;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 40rpx;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 为按钮添加点击效果 */
+.multimodal-search-btn:active {
+  background-color: #4040dd;
+  transform: scale(0.98);
+}
+
+/* 图片加载中状态 */
+.image-item.loading {
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.image-item.loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  margin: -20rpx 0 0 -20rpx;
+  border: 4rpx solid #ccc;
+  border-top-color: #5050ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 搜索历史区域 */
 .search_log{
   display: flex;
   padding: 30rpx 20rpx;
@@ -58,23 +225,48 @@
   margin-bottom: 5rpx;
 }
 
+/* 搜索结果区域 */
 .result_search{
   display: flex;
   flex-direction: column;
   margin-top: 30rpx;
 }
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx 10rpx;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 10rpx;
+}
+
+.result-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.view-all {
+  font-size: 24rpx;
+  color: #5050ff;
+  padding: 10rpx 0;
+}
+
 .result_search .search_item{
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 20rpx 30rpx;
-  box-sizing: border-box;  /* 盒模型 */
+  box-sizing: border-box;
   border-bottom: 3rpx solid #dfdce6;
 }
+
 .search_item .search_item_right{
   width: 30rpx;
   height: 30rpx;
 }
+
 .Imgbtn{
   width: 100vw;
   margin-top: 20rpx;
